@@ -44,6 +44,15 @@
         "tsConfigPath": "apps/payments/tsconfig.app.json"
       }
     },
+    "places": {
+      "type": "application",
+      "root": "apps/places",
+      "entryFile": "main",
+      "sourceRoot": "apps/places/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/places/tsconfig.app.json"
+      }
+    },
     "reservations": {
       "type": "application",
       "root": "apps/reservations",

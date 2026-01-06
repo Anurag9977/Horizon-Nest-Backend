@@ -30,4 +30,14 @@ export class UsersService {
   findOne(queryFilter: QueryFilter<UserDocument>) {
     return this.userRepo.findOne(queryFilter);
   }
+
+  findAll(queryFilter: QueryFilter<UserDocument>) {
+    return this.userRepo.find(queryFilter);
+  }
+
+  delete(userId: string) {
+    return this.userRepo.findOneAndDelete({
+      _id: userId,
+    });
+  }
 }

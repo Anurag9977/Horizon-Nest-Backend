@@ -12,6 +12,8 @@ import { LoggerModule } from '@app/common';
 import cookieSession from 'cookie-session';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt-strategy';
+import { JwtAuthGuard } from './guards/jwt-auth-guard';
+import { RoleGuard } from './guards/role-guard';
 
 @Module({
   imports: [
@@ -53,6 +55,14 @@ import { JwtStrategy } from './strategies/jwt-strategy';
     UserRepository,
     LocalStrategy,
     JwtStrategy,
+    {
+      provide: 'APP_GUARD',
+      useClass: JwtAuthGuard,
+    },
+    {
+      provide: 'APP_GUARD',
+      useClass: RoleGuard,
+    },
   ],
 })
 export class AuthModule {

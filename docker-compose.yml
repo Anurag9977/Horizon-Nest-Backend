@@ -48,3 +48,16 @@ services:
       - ./apps/notifications/.env
     volumes:
       - .:/usr/src/app
+
+  places:
+    build:
+      context: .
+      dockerfile: apps/places/dockerfile
+      target: development
+    command: npm run start:dev places
+    env_file:
+      - ./apps/places/.env
+    ports:
+      - 3006:3006
+    volumes:
+      - .:/usr/src/app
