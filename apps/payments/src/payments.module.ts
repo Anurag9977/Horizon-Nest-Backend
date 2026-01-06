@@ -4,7 +4,7 @@ import { PaymentsService } from './payments.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { MongooseModule } from '@nestjs/mongoose';
-import { LoggerModule, NOTIFICATIONS_SERVICE } from '@app/common';
+import { AUTH_SERVICE, LoggerModule, NOTIFICATIONS_SERVICE } from '@app/common';
 import { PaymentsDocument, PaymentsSchema } from './models/payments.schema';
 import { PaymentsRepository } from './payments.repository';
 import { ClientsModule, Transport } from '@nestjs/microservices';
@@ -32,6 +32,17 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       { name: PaymentsDocument.name, schema: PaymentsSchema },
     ]),
     ClientsModule.registerAsync([
+      {
+        name: AUTH_SERVICE,
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.TCP,
+          options: {
+            host: configService.get('AUTH_HOST'),
+            port: configService.get('AUTH_TCP_PORT'),
+          },
+        }),
+        inject: [ConfigService],
+      },
       {
         name: NOTIFICATIONS_SERVICE,
         useFactory: (configService: ConfigService) => ({

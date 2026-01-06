@@ -1,7 +1,13 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
 import { ReservationsController } from './reservations.controller';
-import { AUTH_SERVICE, LoggerModule, PAYMENTS_SERVICE } from '@app/common';
+import {
+  AUTH_SERVICE,
+  AuthGuard,
+  LoggerModule,
+  PAYMENTS_SERVICE,
+  PLACES_SERVICE,
+} from '@app/common';
 import {
   ReservationsDocument,
   ReservationsSchema,
@@ -24,6 +30,8 @@ import cookieSession from 'cookie-session';
         AUTH_TCP_PORT: Joi.number().required(),
         PAYMENTS_HOST: Joi.string().required(),
         PAYMENTS_TCP_PORT: Joi.number().required(),
+        PLACES_HOST: Joi.string().required(),
+        PLACES_TCP_PORT: Joi.number().required(),
         COOKIE_KEY: Joi.string().required(),
       }),
     }),
@@ -60,10 +68,28 @@ import cookieSession from 'cookie-session';
         }),
         inject: [ConfigService],
       },
+      {
+        name: PLACES_SERVICE,
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.TCP,
+          options: {
+            host: configService.get('PLACES_HOST'),
+            port: configService.get('PLACES_TCP_PORT'),
+          },
+        }),
+        inject: [ConfigService],
+      },
     ]),
   ],
   controllers: [ReservationsController],
-  providers: [ReservationsService, ReservationsRepository],
+  providers: [
+    ReservationsService,
+    ReservationsRepository,
+    {
+      provide: 'APP_GUARD',
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class ReservationsModule {
   constructor(private readonly configService: ConfigService) {}

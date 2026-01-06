@@ -1,11 +1,24 @@
-import { Controller, Get, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { PaymentsService } from './payments.service';
 import { MessagePattern, Payload, RpcException } from '@nestjs/microservices';
 import { CreateChargePayloadDto } from './dto/create-charge-payload.dto';
+import { AuthGuard, Roles, UserRoles } from '@app/common';
 
 @Controller('payments')
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
+
+  @MessagePattern('test-connection')
+  test() {
+    console.log('Test pattern hit!');
+    return 'Connection is working';
+  }
 
   @UsePipes(
     new ValidationPipe({
@@ -27,6 +40,8 @@ export class PaymentsController {
     );
   }
 
+  @UseGuards(AuthGuard)
+  @Roles(UserRoles.ADMIN)
   @Get('/')
   getAllPayments() {
     return this.paymentsService.getAll();

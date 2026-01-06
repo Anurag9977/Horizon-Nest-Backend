@@ -6,7 +6,7 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   protected abstract readonly loggerService: LoggerService;
   constructor(protected readonly model: Model<TDocument>) {}
 
-  async create(document: Omit<TDocument, '_id'>): Promise<TDocument> {
+  async create(document: Partial<TDocument>): Promise<TDocument> {
     const createdDocument = new this.model({
       ...document,
     });
