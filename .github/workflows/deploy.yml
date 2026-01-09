@@ -30,10 +30,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Conver repo owner name to lowercases
+        run: echo "REPO_OWNER_LC=${REPO_OWNER,,}" >> $GITHUB_ENV
+        env:
+          REPO_OWNER: ${{ github.repository_owner }}
+
       - name: Build and Push Microservice
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         with:
           context: .
           file: apps/${{ matrix.services }}/dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ matrix.services }}:production
+          tags: ${{ env.REGISTRY }}/${{ env.REPO_OWNER_LC }}/${{ matrix.services }}:production
