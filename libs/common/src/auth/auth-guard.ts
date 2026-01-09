@@ -6,10 +6,10 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { UserDocument } from 'apps/auth/src/users/models/user.schema';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { AUTH_SERVICE, PUBLIC_KEY, ROLES_KEY, UserRoles } from '../constants';
 import { Reflector } from '@nestjs/core';
+import { UserDocument } from '../models';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

@@ -1,14 +1,13 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { UserDocument, UserSchema } from './users/models/user.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { UsersService } from './users/users.service';
 import { UserRepository } from './users/user.repository';
 import { LocalStrategy } from './strategies/local-strategy';
-import { LoggerModule } from '@app/common';
+import { LoggerModule, UserDocument, UserSchema } from '@app/common';
 import cookieSession from 'cookie-session';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt-strategy';

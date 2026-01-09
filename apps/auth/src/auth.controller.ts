@@ -10,12 +10,11 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CurrentUser, Public, Roles } from '@app/common/decorators';
-import { UserDocument } from './users/models/user.schema';
 import { CreateUserDto } from './users/dto/create-user.dto';
 import { UsersService } from './users/users.service';
 import { AuthService } from './auth.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { UserRoles } from '@app/common';
+import { UserDocument, UserRoles } from '@app/common';
 import { JwtAuthGuard } from './guards/jwt-auth-guard';
 
 @Controller('auth')
