@@ -7,13 +7,16 @@ import {
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
 import { ReservationsRepository } from './reservations.repository';
-import { UserDocument } from 'apps/auth/src/users/models/user.schema';
-import { PAYMENTS_SERVICE, PLACES_SERVICE } from '@app/common';
+import {
+  PAYMENTS_SERVICE,
+  PLACES_SERVICE,
+  PlacesDocument,
+  UserDocument,
+} from '@app/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { catchError, concatMap, from, map, throwError } from 'rxjs';
 import { QueryFilter } from 'mongoose';
 import { ReservationsDocument } from './models/reservations.schema';
-import { PlacesDocument } from 'apps/places/src/models/places.schema';
 
 @Injectable()
 export class ReservationsService {

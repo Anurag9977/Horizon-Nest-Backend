@@ -1,5 +1,5 @@
+import { UserDocument } from '@app/common';
 import { CreateChargeDto } from '@app/common/dto/create-charge.dto';
-import { UserDocument } from 'apps/auth/src/users/models/user.schema';
 import { Type } from 'class-transformer';
 import { IsDefined, IsNotEmptyObject, ValidateNested } from 'class-validator';
 

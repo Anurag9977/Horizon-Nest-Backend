@@ -2,8 +2,8 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserRepository } from './user.repository';
 import { QueryFilter } from 'mongoose';
-import { UserDocument } from './models/user.schema';
 import bcrypt from 'bcrypt';
+import { UserDocument } from '@app/common';
 
 @Injectable()
 export class UsersService {

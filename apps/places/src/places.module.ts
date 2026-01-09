@@ -4,9 +4,14 @@ import { PlacesService } from './places.service';
 import * as Joi from 'joi';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AUTH_SERVICE, LoggerModule, AuthGuard } from '@app/common';
+import {
+  AUTH_SERVICE,
+  LoggerModule,
+  AuthGuard,
+  PlacesDocument,
+  PlacesSchema,
+} from '@app/common';
 import cookieSession from 'cookie-session';
-import { PlacesDocument, PlacesSchema } from './models/places.schema';
 import { PlacesRepository } from './places.repository';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 

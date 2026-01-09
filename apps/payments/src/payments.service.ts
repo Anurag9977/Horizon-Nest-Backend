@@ -2,9 +2,8 @@ import { Inject, Injectable } from '@nestjs/common';
 import { PaymentsRepository } from './payments.repository';
 import { ConfigService } from '@nestjs/config';
 import Stripe from 'stripe';
-import { NOTIFICATIONS_SERVICE } from '@app/common';
+import { NOTIFICATIONS_SERVICE, UserDocument } from '@app/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { UserDocument } from 'apps/auth/src/users/models/user.schema';
 
 @Injectable()
 export class PaymentsService {
