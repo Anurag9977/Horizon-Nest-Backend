@@ -30,7 +30,7 @@ RUN npm install --omit=dev
 
 COPY apps/notifications/package.json ./notifications-packages/package.json
 
-RUN cd notifications-packages && npm install --omit=dev
+RUN npm install ./notifications-packages --prefix . --omit=dev
 
 COPY --from=development /usr/src/app/dist ./dist
 

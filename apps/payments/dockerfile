@@ -30,7 +30,7 @@ RUN npm install --omit=dev
 
 COPY apps/payments/package.json ./payments-packages/package.json
 
-RUN cd payments-packages && npm install --omit=dev
+RUN npm install ./payments-packages --prefix . --omit=dev
 
 COPY --from=development /usr/src/app/dist ./dist
 

@@ -30,7 +30,7 @@ RUN npm install --omit=dev
 
 COPY apps/auth/package.json ./auth-packages/package.json
 
-RUN cd auth-packages && npm install --omit=dev
+RUN npm install ./auth-packages --prefix . --omit=dev
 
 COPY --from=development /usr/src/app/dist ./dist
 
